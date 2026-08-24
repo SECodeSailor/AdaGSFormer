@@ -2,46 +2,46 @@
 
 <div align="center">
 
-[![Paper](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/xxxx.xxxxx)
+[![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/xxxx.xxxxx)
 [![Project Page](https://img.shields.io/badge/Project-Page-blue.svg)](https://your-project-page.github.io)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/your-username/AdaGSFormer?style=social)](https://github.com/your-username/AdaGSFormer)
 
-[Author 1](https://github.com/)*, [Author 2](https://github.com/), [Author 3](https://github.com/), [Corresponding Author](https://github.com/)<sup>†</sup>
+[Author 1](https://github.com/)\*, [Author 2](https://github.com/), [Author 3](https://github.com/), [Corresponding Author](https://github.com/)<sup>†</sup>
 
-*Institution / University Name*
+*Institution / Laboratory Name*
 
 </div>
 
-> **Abstract:** 3D semantic occupancy prediction is crucial for fine-grained 3D scene perception in autonomous driving. While continuous 3D Gaussian representations offer significant memory savings over dense voxel grids, standard Gaussian-based methods often suffer from rigid Gaussian distribution and redundant computations in homogeneous regions. In this work, we propose **AdaGSFormer**, a novel framework featuring **complexity-adaptive Gaussian evolution** for 3D semantic occupancy prediction. By dynamically evolving 3D Gaussian queries according to local geometric and semantic complexity, AdaGSFormer achieves superior occupancy accuracy with enhanced computational efficiency and reduced memory consumption.
+> **Abstract:** 3D semantic occupancy prediction is essential for reliable 3D scene perception in autonomous driving. While continuous 3D Gaussian representations offer significant memory savings over dense voxel grids, existing Gaussian-based methods often suffer from uniform allocation constraints and redundant computations across varying scene complexities. In this work, we propose **AdaGSFormer**, a framework featuring **complexity-adaptive Gaussian evolution** for 3D semantic occupancy prediction. By dynamically evolving 3D Gaussians according to local geometric and semantic complexity, AdaGSFormer achieves superior occupancy accuracy with reduced memory footprint and enhanced inference efficiency.
 
 ---
 
 ## 📢 News
-* **[2026/xx/xx]** Code, pretrained models, and benchmark configs are released!
-* **[2026/xx/xx]** AdaGSFormer is submitted to IEEE TPAMI / arXiv preprint is available at [arXiv:xxxx.xxxxx](https://arxiv.org/abs/xxxx.xxxxx).
+* **[2026/xx/xx]** Code, configs, and pre-trained checkpoints are released!
+* **[2026/xx/xx]** AdaGSFormer is available on arXiv: [arXiv:xxxx.xxxxx](https://arxiv.org/abs/xxxx.xxxxx).
 
 ---
 
 ## 💡 Overview
 
 <div align="center">
-  <img src="assets/framework.png" width="95%"/>
+  <img src="assets/framework.png" width="95%" alt="AdaGSFormer Framework"/>
 </div>
 
-Accurate and efficient 3D scene perception requires balancing fine geometric detail with low memory overhead. In this paper, we propose **AdaGSFormer**, which introduces:
-1. **Complexity-Adaptive Gaussian Allocation:** Dynamically allocating Gaussian primitives based on regional geometric complexity (e.g., dense Gaussians for intricate boundaries/small objects and sparse Gaussians for flat surfaces/free space).
-2. **Evolutionary Gaussian Refinement:** A progressive refinement mechanism that evolves Gaussian attributes across Transformer layers for precise semantic query and occupancy rendering.
-3. **State-of-the-Art Performance:** Extensive evaluations on the **Occ3D-nuScenes** (and SurroundOcc) benchmarks demonstrate that AdaGSFormer delivers leading mIoU performance while maintaining high efficiency.
+### Highlights:
+* **Complexity-Adaptive Gaussian Allocation:** Dynamically distributes 3D Gaussian primitives based on regional geometric intricacies (dense for fine details/small objects and compact for homogeneous flat regions).
+* **Evolutionary Gaussian Refinement:** Employs an evolutionary updating mechanism across Transformer layers to iteratively optimize Gaussian geometry and semantic features.
+* **Efficient & SOTA Performance:** Delivers state-of-the-art mIoU on the **Occ3D-nuScenes** benchmark while significantly saving GPU memory.
 
 ---
 
 ## 🛠️ Getting Started
 
-### Installation
-Follow [installation instructions](docs/install.md) to set up the Python environment, CUDA toolkit, and custom Gaussian rasterization/CUDA ops.
+### 1. Installation
 
 ```bash
-# Clone the repository
+# Clone repository
 git clone https://github.com/your-username/AdaGSFormer.git
 cd AdaGSFormer
 
@@ -52,4 +52,97 @@ conda activate adagsformer
 # Install PyTorch & dependencies
 pip install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cu118
 pip install -r requirements.txt
+
+# Install custom CUDA ops (Gaussian Rasterization / Deformable Attention)
 python setup.py develop
+```
+
+### 2. Dataset Preparation
+
+Download the [nuScenes](https://www.nuscenes.org/download) dataset and the [Occ3D-nuScenes](https://github.com/tusen-ai/Occ3D) annotations. Organize the directory as follows:
+
+```text
+AdaGSFormer
+├── data/
+│   ├── nuscenes/
+│   │   ├── maps/
+│   │   ├── samples/
+│   │   ├── sweeps/
+│   │   ├── v1.0-trainval/
+│   ├── occ3d_nuscenes/
+│   │   ├── gts/
+│   │   │   ├── scene-xxxx/
+│   │   │   │   └── xxxx_occupancy.npy
+│   │   ├── annotations.json
+│   ├── nuscenes_infos_train.pkl
+│   └── nuscenes_infos_val.pkl
+├── configs/
+├── tools/
+└── models/
+```
+
+---
+
+## 📊 Benchmark & Pre-trained Models
+
+| Benchmark | Modality | Backbone | Resolution | IoU (%) | mIoU (%) | Checkpoint | Config |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Occ3D-nuScenes | Camera (6-View) | ResNet-50 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r50_occ3d.py) |
+| Occ3D-nuScenes | Camera (6-View) | ResNet-101 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r101_occ3d.py) |
+| Occ3D-nuScenes | LiDAR + Camera | ResNet-50 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_fusion_occ3d.py) |
+
+---
+
+## 🚀 Training & Evaluation
+
+### Evaluation
+To evaluate a pre-trained model on Occ3D-nuScenes validation set:
+
+```bash
+# 8-GPU Evaluation
+bash tools/dist_test.sh configs/adagsformer_r50_occ3d.py ckpts/adagsformer_r50.pth 8 --eval mIoU
+```
+
+### Training
+To train AdaGSFormer on 8 GPUs:
+
+```bash
+# Distributed Training
+bash tools/dist_train.sh configs/adagsformer_r50_occ3d.py 8 --work-dir work_dirs/adagsformer_r50
+```
+
+### Visualization
+To visualize predicted 3D Gaussians and voxel occupancy:
+
+```bash
+python tools/visualize.py \
+    --config configs/adagsformer_r50_occ3d.py \
+    --checkpoint ckpts/adagsformer_r50.pth \
+    --sample-idx 0 \
+    --save-dir vis_outputs/
+```
+
+---
+
+## 🔗 Related Projects
+
+Our project builds upon and is inspired by the following excellent repositories:
+* [GaussianFormer](https://github.com/wzzheng/GaussianFormer)
+* [Occ3D](https://github.com/tusen-ai/Occ3D)
+* [SurroundOcc](https://github.com/weiyithu/SurroundOcc)
+* [BEVFormer](https://github.com/fundamentalvision/BEVFormer)
+
+---
+
+## 📝 Citation
+
+If you find this code or research helpful, please consider citing:
+
+```bibtex
+@article{adagsformer2026,
+  title   = {AdaGSFormer: Complexity-Adaptive Gaussian Evolution for 3D Semantic Occupancy Prediction},
+  author  = {Author One and Author Two and Author Three},
+  journal = {arXiv preprint arXiv:xxxx.xxxxx},
+  year    = {2026}
+}
+```
