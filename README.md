@@ -87,7 +87,7 @@ AdaGSFormer
 
 | Benchmark | Modality | Backbone | Resolution | IoU (%) | mIoU (%) | Checkpoint | Config |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| SurroundOcc | Camera (6-View) | ResNet-101 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r50_occ3d.py) |
+| SurroundOcc | Camera (6-View) | ResNet-101 | 200x200x16 | 31.79 | 21.13 | [Download](https://github.com/) | [config](configs/adagsformer_r50_occ3d.py) |
 <!--
 | Occ3D-nuScenes | Camera (6-View) | ResNet-101 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r101_occ3d.py) |
 | Occ3D-nuScenes | LiDAR + Camera | ResNet-50 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_fusion_occ3d.py) |
