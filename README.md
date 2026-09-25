@@ -20,7 +20,7 @@ We propose **AdaGSFormer**, a complexity-adaptive Gaussian evolution framework t
 
 ## 📢 News
 * **[2026/08/25]** Code, configs, and pre-trained checkpoints are released!
-% * **[2026/xx/xx]** AdaGSFormer is available on arXiv: [arXiv:xxxx.xxxxx](https://arxiv.org/abs/xxxx.xxxxx).
+<!-- * **[2026/xx/xx]** AdaGSFormer is available on arXiv: [arXiv:xxxx.xxxxx](https://arxiv.org/abs/xxxx.xxxxx). -->
 
 ---
 
@@ -88,19 +88,21 @@ AdaGSFormer
 | Benchmark | Modality | Backbone | Resolution | IoU (%) | mIoU (%) | Checkpoint | Config |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
 | SurroundOcc | Camera (6-View) | ResNet-101 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r50_occ3d.py) |
-% | Occ3D-nuScenes | Camera (6-View) | ResNet-101 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r101_occ3d.py) |
-% | Occ3D-nuScenes | LiDAR + Camera | ResNet-50 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_fusion_occ3d.py) |
+<!--
+| Occ3D-nuScenes | Camera (6-View) | ResNet-101 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r101_occ3d.py) |
+| Occ3D-nuScenes | LiDAR + Camera | ResNet-50 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_fusion_occ3d.py) |
+-->
 
 ---
 
 ## 🚀 Training & Evaluation
 
 ### Evaluation
-To evaluate a pre-trained model on Occ3D-nuScenes validation set:
+To evaluate a pre-trained model on the SurroundOcc validation set:
 
 ```bash
 # 8-GPU Evaluation
-bash tools/dist_test.sh configs/adagsformer_r50_occ3d.py ckpts/adagsformer_r50.pth 8 --eval mIoU
+bash tools/dist_test.sh configs/adagsformer_r101_surroundocc.py ckpts/adagsformer_r101.pth 8 --eval mIoU
 ```
 
 ### Training
@@ -108,7 +110,7 @@ To train AdaGSFormer on 8 GPUs:
 
 ```bash
 # Distributed Training
-bash tools/dist_train.sh configs/adagsformer_r50_occ3d.py 8 --work-dir work_dirs/adagsformer_r50
+bash tools/dist_train.sh configs/adagsformer_r101_surroundocc.py 8 --work-dir work_dirs/adagsformer_r101
 ```
 
 ### Visualization
@@ -116,8 +118,8 @@ To visualize predicted 3D Gaussians and voxel occupancy:
 
 ```bash
 python tools/visualize.py \
-    --config configs/adagsformer_r50_occ3d.py \
-    --checkpoint ckpts/adagsformer_r50.pth \
+    --config configs/adagsformer_r101_surroundocc.py \
+    --checkpoint ckpts/adagsformer_r101.pth \
     --sample-idx 0 \
     --save-dir vis_outputs/
 ```
