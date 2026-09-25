@@ -2,7 +2,7 @@
 
 <div align="center">
 
-% [![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/xxxx.xxxxx)
+[![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/xxxx.xxxxx)
 [![Project Page](https://img.shields.io/badge/Project-Page-blue.svg)](https://your-project-page.github.io)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/your-username/AdaGSFormer?style=social)](https://github.com/your-username/AdaGSFormer)
