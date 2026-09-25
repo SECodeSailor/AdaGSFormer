@@ -14,7 +14,7 @@
 </div>
 
 > **Abstract:** Gaussian-based representations offer an efficient alternative to dense volumetric features for 3D semantic occupancy prediction. Existing methods adapt the Gaussian population mainly through progressive densification or allocation under a predefined final budget, limiting their ability to increase capacity in structurally complex regions while removing redundancy elsewhere.
-We propose \textbf{AdaGSFormer}, a complexity-adaptive Gaussian evolution framework that adjusts the population size according to local scene structure without prescribing its final cardinality. AdaGSFormer predicts Gaussian-wise complexity scores using supervision derived from local semantic heterogeneity and uses scene-relative thresholds to guide population restructuring. It splits Gaussians in complex regions and removes redundant primitives through contribution-aware pruning and moment-preserving merging. To decode the resulting variable-size population, we formulate Gaussian contributions and Gaussian-to-voxel splatting in additive optical-density space. On NuScenes, AdaGSFormer achieves state-of-the-art semantic occupancy performance, while providing approximately $2.5\times$ faster inference and 57.8\% lower GPU memory than GaussianFormer-2. These results demonstrate the effectiveness of complexity-adaptive Gaussian evolution for accurate and efficient 3D semantic occupancy prediction.
+We propose **AdaGSFormer**, a complexity-adaptive Gaussian evolution framework that adjusts the population size according to local scene structure without prescribing its final cardinality. AdaGSFormer predicts Gaussian-wise complexity scores using supervision derived from local semantic heterogeneity and uses scene-relative thresholds to guide population restructuring. It splits Gaussians in complex regions and removes redundant primitives through contribution-aware pruning and moment-preserving merging. To decode the resulting variable-size population, we formulate Gaussian contributions and Gaussian-to-voxel splatting in additive optical-density space. On NuScenes, AdaGSFormer achieves state-of-the-art semantic occupancy performance, while providing approximately $2.5\times$ faster inference and 57.8\% lower GPU memory than GaussianFormer-2. These results demonstrate the effectiveness of complexity-adaptive Gaussian evolution for accurate and efficient 3D semantic occupancy prediction.
 
 ---
 
@@ -47,15 +47,16 @@ git clone https://github.com/your-username/AdaGSFormer.git
 cd AdaGSFormer
 
 # Create conda environment
-conda create -n adagsformer python=3.8 -y
+conda create -n adagsformer python=3.11.7
 conda activate adagsformer
 
 # Install PyTorch & dependencies
-pip install torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cu118
-pip install -r requirements.txt
+pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
 
-# Install custom CUDA ops (Gaussian Rasterization / Deformable Attention)
-python setup.py develop
+# Install OpenMMLab & 3D packages
+pip install openmim
+mim install mmcv==2.1.0 mmdet==3.2.0 mmdet3d==1.3.0
+pip install spconv-cu120
 ```
 
 ### 2. Dataset Preparation
@@ -70,13 +71,11 @@ AdaGSFormer
 │   │   ├── samples/
 │   │   ├── sweeps/
 │   │   ├── v1.0-trainval/
-│   ├── occ3d_nuscenes/
-│   │   ├── gts/
-│   │   │   ├── scene-xxxx/
-│   │   │   │   └── xxxx_occupancy.npy
-│   │   ├── annotations.json
-│   ├── nuscenes_infos_train.pkl
-│   └── nuscenes_infos_val.pkl
+│   ├── surround_occ/
+│   │   ├── samples/
+│   │   │   ├── xxxx_occupancy.npy/
+│   │   ├── nuscenes_infos_train.pkl
+│   │   ├── nuscenes_infos_val.pkl
 ├── configs/
 ├── tools/
 └── models/
@@ -88,9 +87,9 @@ AdaGSFormer
 
 | Benchmark | Modality | Backbone | Resolution | IoU (%) | mIoU (%) | Checkpoint | Config |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| Occ3D-nuScenes | Camera (6-View) | ResNet-50 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r50_occ3d.py) |
-| Occ3D-nuScenes | Camera (6-View) | ResNet-101 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r101_occ3d.py) |
-| Occ3D-nuScenes | LiDAR + Camera | ResNet-50 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_fusion_occ3d.py) |
+| SurroundOcc | Camera (6-View) | ResNet-101 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r50_occ3d.py) |
+% | Occ3D-nuScenes | Camera (6-View) | ResNet-101 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_r101_occ3d.py) |
+% | Occ3D-nuScenes | LiDAR + Camera | ResNet-50 | 200x200x16 | --.- | --.- | [Download](https://github.com/) | [config](configs/adagsformer_fusion_occ3d.py) |
 
 ---
 
