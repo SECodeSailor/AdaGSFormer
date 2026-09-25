@@ -2,24 +2,25 @@
 
 <div align="center">
 
-[![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/xxxx.xxxxx)
+% [![Paper](https://img.shields.io/badge/arXiv-Paper-b31b1b.svg)](https://arxiv.org/abs/xxxx.xxxxx)
 [![Project Page](https://img.shields.io/badge/Project-Page-blue.svg)](https://your-project-page.github.io)
 [![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 [![GitHub Stars](https://img.shields.io/github/stars/your-username/AdaGSFormer?style=social)](https://github.com/your-username/AdaGSFormer)
 
-[Author 1](https://github.com/)\*, [Author 2](https://github.com/), [Author 3](https://github.com/), [Corresponding Author](https://github.com/)<sup>†</sup>
+[Author 1](https://github.com/), [Author 2](https://github.com/)\*, [Author 3](https://github.com/)
 
 *Institution / Laboratory Name*
 
 </div>
 
-> **Abstract:** Gaussian-based representations have recently emerged as an efficient alternative to dense volumetric features for 3D semantic occupancy prediction. However, existing feed-forward methods typically maintain a predefined number of Gaussian primitives throughout decoding, implicitly assigning identical representation capacity to scenes and regions with substantially different structural complexity. This fixed-capacity formulation can lead to insufficient modeling of fine-grained structures in complex regions while introducing redundant primitives in homogeneous or weakly informative areas. To address this limitation, we propose **AdaGSFormer**, a complexity-adaptive Gaussian evolution framework that transforms Gaussian cardinality from a manually specified static budget into scene-conditioned representation capacity. AdaGSFormer first estimates Gaussian-level representation demand from local semantic heterogeneity and derives sample-adaptive decision boundaries for progressive capacity allocation. Based on the estimated demand, a measure-consistent evolution mechanism dynamically reallocates primitives through learnable splitting, contribution-aware pruning, and distribution-preserving merging. To maintain prediction consistency under changing Gaussian cardinality, we further formulate Gaussian restructuring and Gaussian-to-Voxel decoding within a unified optical-density representation, preserving occupancy evidence during population evolution. Experiments on SurroundOcc and SSCBench-KITTI-360 demonstrate that AdaGSFormer provides an effective accuracy--efficiency trade-off over fixed-capacity Gaussian baselines while adaptively allocating representation resources according to scene complexity.
+> **Abstract:** Gaussian-based representations offer an efficient alternative to dense volumetric features for 3D semantic occupancy prediction. Existing methods adapt the Gaussian population mainly through progressive densification or allocation under a predefined final budget, limiting their ability to increase capacity in structurally complex regions while removing redundancy elsewhere.
+We propose \textbf{AdaGSFormer}, a complexity-adaptive Gaussian evolution framework that adjusts the population size according to local scene structure without prescribing its final cardinality. AdaGSFormer predicts Gaussian-wise complexity scores using supervision derived from local semantic heterogeneity and uses scene-relative thresholds to guide population restructuring. It splits Gaussians in complex regions and removes redundant primitives through contribution-aware pruning and moment-preserving merging. To decode the resulting variable-size population, we formulate Gaussian contributions and Gaussian-to-voxel splatting in additive optical-density space. On NuScenes, AdaGSFormer achieves state-of-the-art semantic occupancy performance, while providing approximately $2.5\times$ faster inference and 57.8\% lower GPU memory than GaussianFormer-2. These results demonstrate the effectiveness of complexity-adaptive Gaussian evolution for accurate and efficient 3D semantic occupancy prediction.
 
 ---
 
 ## 📢 News
-* **[2026/xx/xx]** Code, configs, and pre-trained checkpoints are released!
-* **[2026/xx/xx]** AdaGSFormer is available on arXiv: [arXiv:xxxx.xxxxx](https://arxiv.org/abs/xxxx.xxxxx).
+* **[2026/08/25]** Code, configs, and pre-trained checkpoints are released!
+% * **[2026/xx/xx]** AdaGSFormer is available on arXiv: [arXiv:xxxx.xxxxx](https://arxiv.org/abs/xxxx.xxxxx).
 
 ---
 
@@ -32,7 +33,7 @@
 ### Highlights:
 * **Complexity-Adaptive Gaussian Allocation:** Dynamically distributes 3D Gaussian primitives based on regional geometric intricacies (dense for fine details/small objects and compact for homogeneous flat regions).
 * **Evolutionary Gaussian Refinement:** Employs an evolutionary updating mechanism across Transformer layers to iteratively optimize Gaussian geometry and semantic features.
-* **Efficient & SOTA Performance:** Delivers state-of-the-art mIoU on the **Occ3D-nuScenes** benchmark while significantly saving GPU memory.
+* **Efficient & SOTA Performance:** Delivers state-of-the-art mIoU on the **SurroundOcc** benchmark while significantly saving GPU memory.
 
 ---
 
