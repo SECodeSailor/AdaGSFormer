@@ -27,7 +27,7 @@ We propose **AdaGSFormer**, a complexity-adaptive Gaussian evolution framework t
 ## 💡 Overview
 
 <div align="center">
-  <img src="assets/framework.png" width="95%" alt="AdaGSFormer Framework"/>
+  <img src="assets/fig11_01.png" width="95%" alt="AdaGSFormer Framework"/>
 </div>
 
 ### Highlights:
