@@ -100,17 +100,15 @@ AdaGSFormer
 ### Evaluation
 To evaluate a pre-trained model on the SurroundOcc validation set:
 
-```bash
-# 8-GPU Evaluation
-bash tools/dist_test.sh configs/adagsformer_r101_surroundocc.py ckpts/adagsformer_r101.pth 8 --eval mIoU
+```
+python eval.py --py--config config/nuscenes_grid_optical_adaptive.py --resume-from xxx.pth
 ```
 
 ### Training
 To train AdaGSFormer on 8 GPUs:
 
-```bash
-# Distributed Training
-bash tools/dist_train.sh configs/adagsformer_r101_surroundocc.py 8 --work-dir work_dirs/adagsformer_r101
+```
+python train.py --py-config config/nuscenes_grid_optical_adaptive.py
 ```
 
 ### Visualization
